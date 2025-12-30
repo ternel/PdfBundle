@@ -15,8 +15,8 @@ use Ps\PdfBundle\Annotation\Pdf as PdfAnnotation;
 use Ps\PdfBundle\Reflection\Factory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Twig\Environment;
 
 /**
@@ -42,7 +42,7 @@ class PdfListener
         $this->cache = $cache;
     }
 
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelController(ControllerEvent $event)
     {
         $request = $event->getRequest();
         $format = $request->get('_format');
@@ -60,7 +60,7 @@ class PdfListener
         }
     }
 
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onKernelResponse(ResponseEvent $event)
     {
         $request = $event->getRequest();
 
